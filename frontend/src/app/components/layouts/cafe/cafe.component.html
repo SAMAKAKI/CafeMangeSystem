@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" class="flex justify-between items-center z-10">
+  <div class="flex items-center justify-center gap-6">
+    <button (click)="drawer.toggle()"><fa-icon [icon]="faBars" class="text-2xl"></fa-icon></button>
+    <span class="text-2xl"><fa-icon [icon]="faShop" class="me-3"></fa-icon>Cafe Management System</span>
+  </div>
+  <app-header></app-header>
+</mat-toolbar>
+<mat-drawer-container class="w-full h-[93.4vh]" [hasBackdrop]="true">
+  <mat-drawer #drawer mode="push" class="w-[310px] pt-2">
+    <div *ngFor="let menuItem of menuItems.getMenuItem()" class="flex flex-col justify-start gap-3 mx-3 text-2xl py-2 px-4" routerLinkActive="selected">
+      <a [routerLink]="['/cafe', menuItem.state]" *ngIf="(menuItem.role === '' || menuItem.role === tokenPayload.role)" class="flex items-center gap-3">
+        <mat-icon>{{ menuItem.icon }}</mat-icon>
+        <span>{{ menuItem.name }}</span>
+      </a>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

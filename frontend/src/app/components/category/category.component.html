@@ -1,0 +1,20 @@
+<mat-card class="mb-10 text-center py-3 text-white">
+  <span class="text-2xl font-bold">{{ dialogData.action }} Category</span>
+</mat-card>
+<mat-dialog-content>
+  <form [formGroup]="categoryForm">
+    <div class="flex flex-col">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required type="text">
+        <mat-error *ngIf="categoryForm.controls.name.touched && categoryForm.controls.name.invalid">
+          <span *ngIf="categoryForm.controls.name.errors.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" type="submit" (click)="handleSubmit()" [disabled]="!(categoryForm.valid && categoryForm.dirty)">{{ action }}</button>
+  <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>
